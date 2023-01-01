@@ -1,12 +1,16 @@
 #include "Game.h"
 
+#include <cassert>
+
 #include "raylib.h"
 
 Game::Game(int width, int height, std::string title) {
+    assert(!GetWindowHandle() && "Window is already open");
     InitWindow(width, height, title.c_str());
 }
 
 Game::~Game() {
+    assert(GetWindowHandle() && "Window is already closed");
     CloseWindow();
 }
 
