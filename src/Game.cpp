@@ -5,7 +5,7 @@
 #include "raylib.h"
 
 Game::Game(int width, int height, int fps, std::string title)
-    : board_(200, 200, 10, 20, 15)
+    : board_(200, 200, 10, 20, 15, 2)
 {
     assert(!GetWindowHandle() && "Window is already open");
     SetTargetFPS(fps);

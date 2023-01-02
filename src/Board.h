@@ -25,9 +25,10 @@ private:
     const int width_;
     const int height_;
     const int cell_size_;
+    const int cell_padding_;
 
 public:
-    Board(int x, int y, int width, int height, int cell_size);
+    Board(int x, int y, int width, int height, int cell_size, int cell_padding);
     void SetCell(int x, int y, Color c);
     void DrawCell(int x, int y) const;
     void Draw() const;
