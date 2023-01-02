@@ -4,11 +4,11 @@
 template <typename T>
 class Vec2 {
 private:
-    T x_{};
-    T y_{};
+    T x_;
+    T y_;
 
 public:
-    constexpr Vec2() = default;
+    Vec2() = default;
 
     constexpr Vec2(T x, T y)
         : x_(x),
