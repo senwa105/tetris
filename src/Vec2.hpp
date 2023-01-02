@@ -15,52 +15,52 @@ public:
           y_(y)
     {}
 
-    T GetX() const { return x_; }
-    T GetY() const { return y_; }
-    void SetX(T x) { x_ = x; }
-    void SetY(T y) { y_ = y; }
+    constexpr T GetX() const { return x_; }
+    constexpr T GetY() const { return y_; }
+    constexpr void SetX(T x) { x_ = x; }
+    constexpr void SetY(T y) { y_ = y; }
 
-    Vec2 operator+(const Vec2& rhs) const {
+    constexpr Vec2 operator+(const Vec2& rhs) const {
         return Vec2{x_ + rhs.x_, y_ + rhs.y_};
     }
 
-    Vec2 operator+(const int rhs) const {
+    constexpr Vec2 operator+(const int rhs) const {
         return Vec2{x_ + rhs, y_ + rhs};
     }
 
-    Vec2& operator+=(const Vec2& rhs) {
+    constexpr Vec2& operator+=(const Vec2& rhs) {
         return *this = *this + rhs;
     }
 
-    Vec2 operator-(const Vec2& rhs) const {
+    constexpr Vec2 operator-(const Vec2& rhs) const {
         return Vec2{x_ - rhs.x_, y_ - rhs.y_};
     }
 
-    Vec2 operator-(const int rhs) const {
+    constexpr Vec2 operator-(const int rhs) const {
         return Vec2{x_ - rhs, y_ - rhs};
     }
 
-    Vec2& operator-=(const Vec2& rhs) {
+    constexpr Vec2& operator-=(const Vec2& rhs) {
         return *this = *this - rhs;
     }
 
-    Vec2 operator*(const Vec2& rhs) const {
+    constexpr Vec2 operator*(const Vec2& rhs) const {
         return Vec2{x_ * rhs.x_, y_ * rhs.y_};
     }
 
-    Vec2 operator*(const int rhs) const {
+    constexpr Vec2 operator*(const int rhs) const {
         return Vec2{x_ * rhs, y_ * rhs};
     }
 
-    Vec2& operator*=(const Vec2& rhs) {
+    constexpr Vec2& operator*=(const Vec2& rhs) {
         return *this = *this * rhs;
     }
 
-    bool operator==(const Vec2& rhs) const {
+    constexpr bool operator==(const Vec2& rhs) const {
         return x_ == rhs.x_ && y_ == rhs.y_;
     }
 
-    bool operator!=(const Vec2& rhs) const {
+    constexpr bool operator!=(const Vec2& rhs) const {
         return !(*this == rhs);
     }
 };
