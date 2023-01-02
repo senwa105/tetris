@@ -2,6 +2,8 @@
 
 #include <cassert>
 
+#include "Settings.h"
+
 Board::Cell::Cell()
     : exists_(false),
       color_(WHITE)
@@ -48,10 +50,10 @@ void Board::DrawCell(Vec2<int> position) const {
 }
 
 void Board::DrawBorder() const {
-    raylibcpp::DrawRectangleLinesEx(screen_position_ - (cell_size_ / 2),
-                                    Vec2{width_ * cell_size_, height_ * cell_size_} + cell_size_,
-                                    cell_size_ / 2,
-                                    WHITE);
+    raylibcpp::DrawRectangleLinesEx(screen_position_ - settings::border_width,
+                                    Vec2{width_ * cell_size_, height_ * cell_size_} + settings::cell_padding + settings::border_width * 2,
+                                    settings::border_width,
+                                    settings::border_color);
 }
 
 void Board::Draw() const {
