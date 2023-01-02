@@ -29,7 +29,7 @@ endif()
 
 set(SOURCES
   src/main.cpp
-  src/Raylibcpp.cpp
+  src/raylibcpp.cpp
   src/Settings.h
   src/Game.h
   src/Game.cpp
