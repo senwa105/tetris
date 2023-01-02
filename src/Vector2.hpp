@@ -24,7 +24,7 @@ public:
         return Vector2{x_ + rhs.x_, y_ + rhs.y_};
     }
 
-    Vector2 operator+(const int rhs) {
+    Vector2 operator+(const int rhs) const {
         return Vector2{x_ + rhs, y_ + rhs};
     }
 
@@ -36,7 +36,7 @@ public:
         return Vector2{x_ - rhs.x_, y_ - rhs.y_};
     }
 
-    Vector2 operator-(const int rhs) {
+    Vector2 operator-(const int rhs) const {
         return Vector2{x_ - rhs, y_ - rhs};
     }
 
@@ -48,7 +48,7 @@ public:
         return Vector2{x_ * rhs.x_, y_ * rhs.y_};
     }
 
-    Vector2 operator*(const int rhs) {
+    Vector2 operator*(const int rhs) const {
         return Vector2{x_ * rhs, y_ * rhs};
     }
 
