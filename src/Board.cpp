@@ -47,8 +47,17 @@ void Board::DrawCell(Vec2<int> position) const {
     raylibcpp::DrawRectangle(top_left, bottom_right, cells_[y * width_ + x].GetColor());
 }
 
+void Board::DrawBorder() const {
+    raylibcpp::DrawRectangleLinesEx(screen_position_ - (cell_size_ / 2),
+                                    Vec2{width_ * cell_size_, height_ * cell_size_} + cell_size_,
+                                    cell_size_ / 2,
+                                    WHITE);
+}
+
 void Board::Draw() const {
     for (int y = 0; y < height_; y++)
         for (int x = 0; x < width_; x++)
             DrawCell(Vec2<int>{x, y});
+
+    DrawBorder();
 }
