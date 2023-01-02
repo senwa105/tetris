@@ -30,7 +30,9 @@ endif()
 set(SOURCES
   src/main.cpp
   src/Game.h
-  src/Game.cpp)
+  src/Game.cpp
+  src/Board.h
+  src/Board.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 #set(raylib_VERBOSE 1)
