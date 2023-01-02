@@ -43,11 +43,8 @@ void Board::DrawCell(Vec2<int> position) const {
     assert(x >= 0 && x < width_ && y >= 0 && y < height_ && "Cell coordinates must be inbounds");
 
     Vec2<int> top_left = screen_position_ + (position * cell_size_) + cell_padding_;
-    DrawRectangle(top_left.GetX(),
-                  top_left.GetY(),
-                  cell_size_ - cell_padding_,
-                  cell_size_ - cell_padding_,
-                  cells_[y * width_ + x].GetColor());
+    Vec2<int> bottom_right = {cell_size_ - cell_padding_, cell_size_ - cell_padding_};
+    raylibcpp::DrawRectangle(top_left, bottom_right, cells_[y * width_ + x].GetColor());
 }
 
 void Board::Draw() const {
