@@ -7,6 +7,7 @@
 
 namespace raylibcpp {
     void DrawRectangle(Vec2<int> position, Vec2<int> width_height, Color color);
+    void DrawRectangleLinesEx(Vec2<int> position, Vec2<int> width_height, int line_thickness, Color color);
 }
 
 #endif
