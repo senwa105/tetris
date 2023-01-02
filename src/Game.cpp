@@ -5,7 +5,7 @@
 #include "raylib.h"
 
 Game::Game(int width, int height, int fps, std::string title)
-    : board_(200, 200, 10, 20, 15, 2)
+    : board_({200, 200}, {10, 20}, 15, 2)
 {
     assert(!GetWindowHandle() && "Window is already open");
     SetTargetFPS(fps);
@@ -13,7 +13,7 @@ Game::Game(int width, int height, int fps, std::string title)
 
     for (int y = 0; y < 20; y++)
         for (int x = 0; x < 10; x++)
-            board_.SetCell(x, y, RED);
+            board_.SetCell({x, y}, RED);
 }
 
 Game::~Game() {
