@@ -14,6 +14,8 @@ namespace settings {
     inline constexpr Vec2<int> board_width_height{10, 20};
     inline constexpr int cell_size = 20;
     inline constexpr int cell_padding = 2;
+    inline constexpr int border_width = 3;
+    inline constexpr Color border_color = WHITE;
 }
 
 #endif
