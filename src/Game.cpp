@@ -2,10 +2,14 @@
 
 #include <cassert>
 
-#include "raylib.h"
+#include "raylibcpp.h"
+#include "Settings.h"
 
 Game::Game(int width, int height, int fps, std::string title)
-    : board_({200, 200}, {10, 20}, 15, 2)
+    : board_(settings::board_position,
+             settings::board_width_height,
+             settings::cell_size,
+             settings::cell_padding)
 {
     assert(!GetWindowHandle() && "Window is already open");
     SetTargetFPS(fps);
