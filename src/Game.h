@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "Board.h"
+
 class Game {
 public:
     Game(int width, int height, int fps, std::string title);
@@ -14,6 +16,8 @@ public:
     void Tick();
     
 private:
+    Board board_;
+
     void Update();
     void Draw();
 };

@@ -4,10 +4,16 @@
 
 #include "raylib.h"
 
-Game::Game(int width, int height, int fps, std::string title) {
+Game::Game(int width, int height, int fps, std::string title)
+    : board_(200, 200, 10, 20, 15)
+{
     assert(!GetWindowHandle() && "Window is already open");
     SetTargetFPS(fps);
     InitWindow(width, height, title.c_str());
+
+    for (int y = 0; y < 20; y++)
+        for (int x = 0; x < 10; x++)
+            board_.SetCell(x, y, RED);
 }
 
 Game::~Game() {
@@ -31,5 +37,6 @@ void Game::Update() {
 }
 
 void Game::Draw() {
-    ClearBackground(RAYWHITE);
+    ClearBackground(BLACK);
+    board_.Draw();
 }
