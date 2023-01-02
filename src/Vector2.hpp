@@ -24,20 +24,32 @@ public:
         return Vector2{x_ + rhs.x_, y_ + rhs.y_};
     }
 
-    Vector2 operator-(const Vector2& rhs) const {
-        return Vector2{x_ - rhs.x_, y_ - rhs.y_};
-    }
-
-    Vector2 operator*(const Vector2& rhs) const {
-        return Vector2{x_ * rhs.x_, y_ * rhs.y_};
+    Vector2 operator+(const int rhs) {
+        return Vector2{x_ + rhs, y_ + rhs};
     }
 
     Vector2& operator+=(const Vector2& rhs) {
         return *this = *this + rhs;
     }
 
+    Vector2 operator-(const Vector2& rhs) const {
+        return Vector2{x_ - rhs.x_, y_ - rhs.y_};
+    }
+
+    Vector2 operator-(const int rhs) {
+        return Vector2{x_ - rhs, y_ - rhs};
+    }
+
     Vector2& operator-=(const Vector2& rhs) {
         return *this = *this - rhs;
+    }
+
+    Vector2 operator*(const Vector2& rhs) const {
+        return Vector2{x_ * rhs.x_, y_ * rhs.y_};
+    }
+
+    Vector2 operator*(const int rhs) {
+        return Vector2{x_ * rhs, y_ * rhs};
     }
 
     Vector2& operator*=(const Vector2& rhs) {
