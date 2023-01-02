@@ -32,7 +32,8 @@ set(SOURCES
   src/Game.h
   src/Game.cpp
   src/Board.h
-  src/Board.cpp)
+  src/Board.cpp
+  src/Vec2.hpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 #set(raylib_VERBOSE 1)
