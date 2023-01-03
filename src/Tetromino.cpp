@@ -11,9 +11,26 @@ Tetromino::Tetromino(const bool* shape, int dimension, Color color, const Board&
 
 void Tetromino::Draw() const {
     for (int y = 0; y < dimension_; y++)
-        for (int x = 0; x < dimension_; x++)
-            if (shape_[y * dimension_ + x])
-                board_.DrawCell(board_position_ + Vec2<int>{x, y});
+        for (int x = 0; x < dimension_; x++) {
+            bool cell = false;
+            switch (current_rotation_) {
+            case Rotation::R0:
+                cell = shape_[y*dimension_ + x];
+                break;
+            case Rotation::R90:
+                cell = shape_[dimension_*(dimension_ - 1) - x*dimension_ + y];
+                break;
+            case Rotation::R180:
+                cell = shape_[dimension_*dimension_ - 1 - y*dimension_  - x];
+                break;
+            case Rotation::R270:
+                cell = shape_[dimension_ - 1 + x*dimension_ - y];
+                break;
+            default:
+                break;
+            }
+        }
+            
 }
 
 void Tetromino::RotateCW() {
