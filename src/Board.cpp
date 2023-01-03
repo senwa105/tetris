@@ -38,6 +38,10 @@ Board::Board(Vec2<int> screen_position , Vec2<int> width_height, int cell_size, 
     cells_.resize(width_ * height_);
 }
 
+bool Board::CellExists(Vec2<int> position) const {
+    return cells_[position.GetY()*width_ + position.GetX()].Exists();
+}
+
 void Board::SetCell(Vec2<int> position, Color c) {
     int x = position.GetX(), y = position.GetY();
     assert(x >= 0 && x < width_ && y >= 0 && y < height_ && "Cell coordinates must be inbounds");
@@ -63,7 +67,8 @@ void Board::DrawBorder() const {
 void Board::Draw() const {
     for (int y = 0; y < height_; y++)
         for (int x = 0; x < width_; x++)
-            DrawCell(Vec2<int>{x, y});
+            if (CellExists({x, y}))
+                DrawCell({x, y});
 
     DrawBorder();
 }
