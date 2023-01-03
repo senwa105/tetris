@@ -38,6 +38,14 @@ Board::Board(Vec2<int> screen_position , Vec2<int> width_height, int cell_size, 
     cells_.resize(width_ * height_);
 }
 
+int Board::GetWidth() const {
+    return width_;
+}
+
+int Board::GetHeight() const {
+    return height_;
+}
+
 bool Board::CellExists(Vec2<int> position) const {
     return cells_[position.GetY()*width_ + position.GetX()].Exists();
 }
