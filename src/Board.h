@@ -34,7 +34,8 @@ public:
     int GetWidth() const;
     int GetHeight() const;
     bool CellExists(Vec2<int> position) const;
-    void SetCell(Vec2<int> position, Color c);
+    void SetCell(Vec2<int> position, Color color);
+    void DrawCell(Vec2<int> position, Color color) const;
     void DrawCell(Vec2<int> position) const;
     void DrawBorder() const;
     void Draw() const;

@@ -50,19 +50,23 @@ bool Board::CellExists(Vec2<int> position) const {
     return cells_[position.GetY()*width_ + position.GetX()].Exists();
 }
 
-void Board::SetCell(Vec2<int> position, Color c) {
+void Board::SetCell(Vec2<int> position, Color color) {
     int x = position.GetX(), y = position.GetY();
     assert(x >= 0 && x < width_ && y >= 0 && y < height_ && "Cell coordinates must be inbounds");
-    cells_[y * width_ + x].SetColor(c);
+    cells_[y * width_ + x].SetColor(color);
 }
 
-void Board::DrawCell(Vec2<int> position) const {
+void Board::DrawCell(Vec2<int> position, Color color) const {
     int x = position.GetX(), y = position.GetY();
     assert(x >= 0 && x < width_ && y >= 0 && y < height_ && "Cell coordinates must be inbounds");
 
     Vec2<int> top_left = screen_position_ + (position * cell_size_) + cell_padding_;
     Vec2<int> bottom_right = {cell_size_ - cell_padding_, cell_size_ - cell_padding_};
-    raylibcpp::DrawRectangle(top_left, bottom_right, cells_[y * width_ + x].GetColor());
+    raylibcpp::DrawRectangle(top_left, bottom_right, color);
+}
+
+void Board::DrawCell(Vec2<int> position) const {
+    DrawCell(position, cells_[position.GetY() * width_ + position.GetX()].GetColor());
 }
 
 void Board::DrawBorder() const {
