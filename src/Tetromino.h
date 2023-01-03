@@ -8,16 +8,28 @@
 #include "Board.h"
 
 class Tetromino {
+public:
+    enum class Rotation {
+        R0,
+        R90,
+        R180,
+        R270
+    };
+
 private:
     const bool* shape_;
     const int dimension_;
     const Color color_;
     const Board& board_;
     Vec2<int> board_position_;
+    Rotation current_rotation_;
 
 public:
     Tetromino(const bool* shape, int dimension, Color color, const Board& board);
     void Draw() const;
+    void RotateCW();
+    void Rotate180();
+    void RotateCCW();
 };
 
 class IMino : public Tetromino {

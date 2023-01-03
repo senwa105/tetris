@@ -5,7 +5,8 @@ Tetromino::Tetromino(const bool* shape, int dimension, Color color, const Board&
       dimension_(dimension),
       color_(color),
       board_(board),
-      board_position_(board.GetWidth()/2 - dimension/2, 0)
+      board_position_(board.GetWidth()/2 - dimension/2, 0),
+      current_rotation_(Rotation::R0)
 {}
 
 void Tetromino::Draw() const {
@@ -13,4 +14,22 @@ void Tetromino::Draw() const {
         for (int x = 0; x < dimension_; x++)
             if (shape_[y * dimension_ + x])
                 board_.DrawCell(board_position_ + Vec2<int>{x, y});
+}
+
+void Tetromino::RotateCW() {
+    static constexpr Rotation clockwise_rotations[] = 
+        {Rotation::R90, Rotation::R180, Rotation::R270, Rotation::R0};
+    current_rotation_ = clockwise_rotations[static_cast<int>(current_rotation_)];
+}
+
+void Tetromino::Rotate180() {
+    static constexpr Rotation double_rotations[] = 
+        {Rotation::R180, Rotation::R270, Rotation::R0, Rotation::R90};
+    current_rotation_ = double_rotations[static_cast<int>(current_rotation_)];
+}
+
+void Tetromino::RotateCCW() {
+    static constexpr Rotation counter_clockwise_rotations[] = 
+        {Rotation::R270, Rotation::R0, Rotation::R90, Rotation::R180};
+    current_rotation_ = counter_clockwise_rotations[static_cast<int>(current_rotation_)];
 }
