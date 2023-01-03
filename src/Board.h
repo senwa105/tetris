@@ -16,6 +16,7 @@ private:
     
     public:
         Cell();
+        bool Exists() const;
         void SetColor(Color c);
         Color GetColor() const;
         void Remove();

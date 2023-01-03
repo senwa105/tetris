@@ -9,6 +9,10 @@ Board::Cell::Cell()
       color_(WHITE)
 {}
 
+bool Board::Cell::Exists() const {
+    return exists_;
+}
+
 void Board::Cell::SetColor(Color c) {
     color_ = c;
     exists_ = true;
