@@ -16,6 +16,16 @@ namespace settings {
     inline constexpr int cell_padding = 2;
     inline constexpr int border_width = 3;
     inline constexpr Color border_color = WHITE;
+
+    // Controls
+    inline constexpr KeyboardKey rotate_cw = KEY_F;
+    inline constexpr KeyboardKey rotate_180 = KEY_E;
+    inline constexpr KeyboardKey rotate_ccw = KEY_D;
+    inline constexpr KeyboardKey hold = KEY_S;
+    inline constexpr KeyboardKey right = KEY_RIGHT;
+    inline constexpr KeyboardKey left = KEY_LEFT;
+    inline constexpr KeyboardKey hard_drop = KEY_SPACE;
+    inline constexpr KeyboardKey soft_drop = KEY_DOWN;
 }
 
 #endif
