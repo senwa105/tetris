@@ -35,7 +35,9 @@ set(SOURCES
   src/Game.cpp
   src/Board.h
   src/Board.cpp
-  src/Vec2.hpp)
+  src/Vec2.hpp
+  src/Tetromino.h
+  src/Tetromino.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 #set(raylib_VERBOSE 1)
