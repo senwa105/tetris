@@ -24,7 +24,7 @@ private:
     Vec2<int> board_position_;
     Rotation current_rotation_;
 
-    bool IsCollision();
+    bool PositionHasCollision(Vec2<int> position, Rotation rotation);
 
 public:
     Tetromino(const bool* shapes, int dimension, Color color, const Board& board);
