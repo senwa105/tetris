@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Board.h"
+#include "Tetromino.h"
 
 class Game {
 public:
@@ -17,9 +18,12 @@ public:
     
 private:
     Board board_;
+    Tetromino active_tetromino_;
+    Tetromino hold_tetromino_;
+    bool can_hold_;
 
-    void Update();
     void Draw();
+    void Update();
 };
 
 #endif
