@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <string>
+#include <optional>
 
 #include "Board.h"
 #include "Tetromino.h"
@@ -19,7 +20,7 @@ public:
 private:
     Board board_;
     Tetromino active_tetromino_;
-    Tetromino hold_tetromino_;
+    std::optional<Tetromino> hold_tetromino_;
     bool can_hold_;
 
     void Draw();
