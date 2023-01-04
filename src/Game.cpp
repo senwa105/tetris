@@ -48,4 +48,8 @@ void Game::Update() {
         active_tetromino_.RotateCCW();
     if (IsKeyPressed(settings::rotate_180))
         active_tetromino_.Rotate180();
+    if (IsKeyPressed(settings::right))
+        active_tetromino_.MoveRight();
+    if (IsKeyPressed(settings::left))
+        active_tetromino_.MoveLeft();
 }
