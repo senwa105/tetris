@@ -29,6 +29,9 @@ void Tetromino::Draw() const {
             default:
                 break;
             }
+
+            if (cell)
+				board_.DrawCell(board_position_ + Vec2<int>{x, y}, color_);
         }
             
 }

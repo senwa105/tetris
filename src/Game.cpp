@@ -9,7 +9,10 @@ Game::Game(int width, int height, int fps, std::string title)
     : board_(settings::board_position,
              settings::board_width_height,
              settings::cell_size,
-             settings::cell_padding)
+             settings::cell_padding),
+      active_tetromino_(JMino{board_}),
+      hold_tetromino_(),
+      can_hold_(true)
 {
     assert(!GetWindowHandle() && "Window is already open");
     SetTargetFPS(fps);
@@ -32,11 +35,17 @@ void Game::Tick() {
     EndDrawing();
 }
 
-void Game::Update() {
-
-}
-
 void Game::Draw() {
     ClearBackground(BLACK);
     board_.Draw();
+    active_tetromino_.Draw();
+}
+
+void Game::Update() {
+    if (IsKeyPressed(settings::rotate_cw))
+        active_tetromino_.RotateCW();
+    if (IsKeyPressed(settings::rotate_ccw))
+        active_tetromino_.RotateCCW();
+    if (IsKeyPressed(settings::rotate_180))
+        active_tetromino_.Rotate180();
 }
