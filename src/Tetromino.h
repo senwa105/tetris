@@ -24,12 +24,16 @@ private:
     Vec2<int> board_position_;
     Rotation current_rotation_;
 
+    bool IsCollision();
+
 public:
     Tetromino(const bool* shape, int dimension, Color color, const Board& board);
     void Draw() const;
     void RotateCW();
     void Rotate180();
     void RotateCCW();
+    void MoveRight();
+    void MoveLeft();
 };
 
 class IMino : public Tetromino {
