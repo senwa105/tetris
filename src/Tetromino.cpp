@@ -10,8 +10,18 @@ Tetromino::Tetromino(const bool* shapes, int dimension, Color color, const Board
       current_rotation_(Rotation::R0)
 {}
 
-bool Tetromino::IsCollision() {
-
+bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) {
+    for (int y = 0; y < dimension_; y++)
+        for (int x = 0; x < dimension_; x++) {
+            int rotation_chunk = static_cast<int>(rotation) * dimension_ * dimension_;
+            bool cell = shapes_[rotation_chunk + y*dimension_ + x];
+            if (cell) {
+                int cell_x = position.GetX() + x;
+                int cell_y = position.GetY() + y;
+                if (cell_x < 0 || cell_x >= board_.GetWidth() || cell_y < 0 || cell_y >= board_.GetHeight())
+                    return true;
+            }
+        }
 }
 
 void Tetromino::Draw() const {
@@ -48,25 +58,33 @@ void Tetromino::Draw() const {
 void Tetromino::RotateCW() {
     static constexpr Rotation clockwise_rotations[] = 
         {Rotation::R90, Rotation::R180, Rotation::R270, Rotation::R0};
-    current_rotation_ = clockwise_rotations[static_cast<int>(current_rotation_)];
+    Rotation new_rotation = clockwise_rotations[static_cast<int>(current_rotation_)];
+    if (!PositionHasCollision(board_position_, new_rotation))
+        current_rotation_ = new_rotation;
 }
 
 void Tetromino::Rotate180() {
     static constexpr Rotation double_rotations[] = 
         {Rotation::R180, Rotation::R270, Rotation::R0, Rotation::R90};
-    current_rotation_ = double_rotations[static_cast<int>(current_rotation_)];
+    Rotation new_rotation = double_rotations[static_cast<int>(current_rotation_)];
+    if (!PositionHasCollision(board_position_, new_rotation))
+        current_rotation_ = new_rotation;
 }
 
 void Tetromino::RotateCCW() {
     static constexpr Rotation counter_clockwise_rotations[] = 
         {Rotation::R270, Rotation::R0, Rotation::R90, Rotation::R180};
-    current_rotation_ = counter_clockwise_rotations[static_cast<int>(current_rotation_)];
+    Rotation new_rotation = counter_clockwise_rotations[static_cast<int>(current_rotation_)];
+    if (!PositionHasCollision(board_position_, new_rotation))
+        current_rotation_ = new_rotation;
 }
 
 void Tetromino::MoveRight() {
-
+    if (!PositionHasCollision(board_position_ + Vec2<int>{1, 0}, current_rotation_))
+        board_position_ += {1, 0};
 }
 
 void Tetromino::MoveLeft() {
-
+    if (!PositionHasCollision(board_position_ + Vec2<int>{-1, 0}, current_rotation_))
+            board_position_ += {-1, 0};
 }
