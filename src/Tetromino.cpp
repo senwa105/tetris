@@ -20,6 +20,9 @@ bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) {
                 int cell_y = position.GetY() + y;
                 if (cell_x < 0 || cell_x >= board_.GetWidth() || cell_y < 0 || cell_y >= board_.GetHeight())
                     return true;
+                // TODO: detect collision with existing block
+                // if (board_.CellExists({cell_x, cell_y}))
+                //     return true;
             }
         }
 }
