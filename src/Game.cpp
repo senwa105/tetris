@@ -15,6 +15,7 @@ Game::Game(int width, int height, int fps, std::string title)
       can_hold_(true)
 {
     assert(!GetWindowHandle() && "Window is already open");
+    SetConfigFlags(FLAG_VSYNC_HINT);
     SetTargetFPS(fps);
     InitWindow(width, height, title.c_str());
 }
@@ -39,6 +40,7 @@ void Game::Draw() {
     ClearBackground(BLACK);
     board_.Draw();
     active_tetromino_.Draw();
+    DrawFPS(10, 10);
 }
 
 void Game::Update() {
@@ -48,8 +50,8 @@ void Game::Update() {
         active_tetromino_.RotateCCW();
     if (IsKeyPressed(settings::rotate_180))
         active_tetromino_.Rotate180();
-    if (IsKeyPressed(settings::right))
+    if (IsKeyDown(settings::right))
         active_tetromino_.MoveRight();
-    if (IsKeyPressed(settings::left))
+    if (IsKeyDown(settings::left))
         active_tetromino_.MoveLeft();
 }
