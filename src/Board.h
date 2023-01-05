@@ -23,11 +23,11 @@ private:
     };
 
     std::vector<Cell> cells_;
-    const Vec2<int> screen_position_;
-    const int width_;
-    const int height_;
-    const int cell_size_;
-    const int cell_padding_;
+    Vec2<int> screen_position_;
+    int width_;
+    int height_;
+    int cell_size_;
+    int cell_padding_;
 
 public:
     Board(Vec2<int> screen_position , Vec2<int> width_height, int cell_size, int cell_padding);
