@@ -1,20 +1,18 @@
 #include "Tetromino.h"
 #include <iostream>
 
-Tetromino::Tetromino(const bool* shapes, int dimension, Color color, Board& board)
-    : shapes_(shapes),
-      dimension_(dimension),
-      color_(color),
+Tetromino::Tetromino(MinoType type, Board& board)
+    : type_(type),
       board_(board),
-      board_position_(board.GetWidth()/2 - dimension/2, 0),
+      board_position_(board.GetWidth()/2 - type_.dimension/2, 0),
       current_rotation_(Rotation::R0)
 {}
 
 bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) {
-    for (int y = 0; y < dimension_; y++)
-        for (int x = 0; x < dimension_; x++) {
-            int rotation_chunk = static_cast<int>(rotation) * dimension_ * dimension_;
-            bool cell = shapes_[rotation_chunk + y*dimension_ + x];
+    for (int y = 0; y < type_.dimension; y++)
+        for (int x = 0; x < type_.dimension; x++) {
+            int rotation_chunk = static_cast<int>(rotation) * type_.dimension * type_.dimension;
+            bool cell = type_.shapes[rotation_chunk + y*type_.dimension + x];
             if (cell) {
                 int cell_x = position.GetX() + x;
                 int cell_y = position.GetY() + y;
@@ -28,21 +26,21 @@ bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) {
 }
 
 void Tetromino::Draw() const {
-    for (int y = 0; y < dimension_; y++)
-        for (int x = 0; x < dimension_; x++) {
+    for (int y = 0; y < type_.dimension; y++)
+        for (int x = 0; x < type_.dimension; x++) {
             // bool cell = false;
             // switch (current_rotation_) {
             // case Rotation::R0:
-            //     cell = shapes_[rotation_chunk + y*dimension_ + x];
+            //     cell = shapes_[rotation_chunk + y*type_.dimension + x];
             //     break;
             // case Rotation::R90:
-            //     cell = shapes_[rotation_chunk + dimension_*(dimension_ - 1) - x*dimension_ + y];
+            //     cell = shapes_[rotation_chunk + type_.dimension*(type_.dimension - 1) - x*type_.dimension + y];
             //     break;
             // case Rotation::R180:
-            //     cell = shapes_[rotation_chunk + dimension_*dimension_ - 1 - y*dimension_  - x];
+            //     cell = shapes_[rotation_chunk + type_.dimension*type_.dimension - 1 - y*type_.dimension  - x];
             //     break;
             // case Rotation::R270:
-            //     cell = shapes_[rotation_chunk + dimension_ - 1 + x*dimension_ - y];
+            //     cell = shapes_[rotation_chunk + type_.dimension - 1 + x*type_.dimension - y];
             //     break;
             // default:
             //     break;
@@ -50,10 +48,10 @@ void Tetromino::Draw() const {
 
             // find the block that describes the shape of the current rotation
             // eg, first dimension*dimension entries describes shape of rotation 0
-            int rotation_chunk = static_cast<int>(current_rotation_) * dimension_ * dimension_;
-            bool cell = shapes_[rotation_chunk + y*dimension_ + x];
+            int rotation_chunk = static_cast<int>(current_rotation_) * type_.dimension * type_.dimension;
+            bool cell = type_.shapes[rotation_chunk + y*type_.dimension + x];
             if (cell)
-				board_.DrawCell(board_position_ + Vec2<int>{x, y}, color_);
+				board_.DrawCell(board_position_ + Vec2<int>{x, y}, type_.color);
         }
             
 }
@@ -93,14 +91,12 @@ void Tetromino::MoveLeft() {
 }
 
 void Tetromino::Lock() {
-    for (int y = 0; y < dimension_; y++)
-        for (int x = 0; x < dimension_; x++) {
-            int rotation_chunk = static_cast<int>(current_rotation_) * dimension_ * dimension_;
-            bool cell = shapes_[rotation_chunk + y*dimension_ + x];
-            if (cell) {
-				board_.SetCell(board_position_ + Vec2<int>{x, y}, color_);
-                // spawn new tetromino
-            }
+    for (int y = 0; y < type_.dimension; y++)
+        for (int x = 0; x < type_.dimension; x++) {
+            int rotation_chunk = static_cast<int>(current_rotation_) * type_.dimension * type_.dimension;
+            bool cell = type_.shapes[rotation_chunk + y*type_.dimension + x];
+            if (cell)
+				board_.SetCell(board_position_ + Vec2<int>{x, y}, type_.color);
         }
 }
 
