@@ -1,18 +1,27 @@
 #include "Tetromino.h"
 #include <iostream>
 
-Tetromino::Tetromino(MinoType type, Board& board)
+Tetromino::Tetromino(MinoType& type, Board& board)
     : type_(type),
       board_(board),
-      board_position_(board.GetWidth()/2 - type_.dimension/2, 0),
+      board_position_(board.GetWidth()/2 - type_.GetDimension()/2, 0),
       current_rotation_(Rotation::R0)
 {}
 
+Tetromino& Tetromino::operator=(const Tetromino& other) {
+    type_ = other.type_;
+    board_ = other.board_;
+    board_position_ = other.board_position_;
+    current_rotation_ = other.current_rotation_;
+    return *this;
+}
+
 bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) const {
-    for (int y = 0; y < type_.dimension; y++)
-        for (int x = 0; x < type_.dimension; x++) {
-            int rotation_chunk = static_cast<int>(rotation) * type_.dimension * type_.dimension;
-            bool cell = type_.shapes[rotation_chunk + y*type_.dimension + x];
+    int dimension = type_.GetDimension();
+    for (int y = 0; y < dimension; y++)
+        for (int x = 0; x < dimension; x++) {
+            int rotation_chunk = static_cast<int>(rotation) * dimension * dimension;
+            bool cell = type_.GetShapes()[rotation_chunk + y*dimension + x];
             if (cell) {
                 int cell_x = position.GetX() + x;
                 int cell_y = position.GetY() + y;
@@ -28,32 +37,15 @@ bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) cons
 }
 
 void Tetromino::Draw() const {
-    for (int y = 0; y < type_.dimension; y++)
-        for (int x = 0; x < type_.dimension; x++) {
-            // bool cell = false;
-            // switch (current_rotation_) {
-            // case Rotation::R0:
-            //     cell = shapes_[rotation_chunk + y*type_.dimension + x];
-            //     break;
-            // case Rotation::R90:
-            //     cell = shapes_[rotation_chunk + type_.dimension*(type_.dimension - 1) - x*type_.dimension + y];
-            //     break;
-            // case Rotation::R180:
-            //     cell = shapes_[rotation_chunk + type_.dimension*type_.dimension - 1 - y*type_.dimension  - x];
-            //     break;
-            // case Rotation::R270:
-            //     cell = shapes_[rotation_chunk + type_.dimension - 1 + x*type_.dimension - y];
-            //     break;
-            // default:
-            //     break;
-            // }
-
+    int dimension = type_.GetDimension();
+    for (int y = 0; y < dimension; y++)
+        for (int x = 0; x < dimension; x++) {
             // find the block that describes the shape of the current rotation
             // eg, first dimension*dimension entries describes shape of rotation 0
-            int rotation_chunk = static_cast<int>(current_rotation_) * type_.dimension * type_.dimension;
-            bool cell = type_.shapes[rotation_chunk + y*type_.dimension + x];
+            int rotation_chunk = static_cast<int>(current_rotation_) * dimension * dimension;
+            bool cell = type_.GetShapes()[rotation_chunk + y*dimension + x];
             if (cell)
-				board_.DrawCell(board_position_ + Vec2<int>{x, y}, type_.color);
+				board_.DrawCell(board_position_ + Vec2<int>{x, y}, type_.GetColor());
         }
             
 }
@@ -93,12 +85,13 @@ void Tetromino::MoveLeft() {
 }
 
 void Tetromino::Lock() const {
-    for (int y = 0; y < type_.dimension; y++)
-        for (int x = 0; x < type_.dimension; x++) {
-            int rotation_chunk = static_cast<int>(current_rotation_) * type_.dimension * type_.dimension;
-            bool cell = type_.shapes[rotation_chunk + y*type_.dimension + x];
+    int dimension = type_.GetDimension();
+    for (int y = 0; y < dimension; y++)
+        for (int x = 0; x < dimension; x++) {
+            int rotation_chunk = static_cast<int>(current_rotation_) * dimension * dimension;
+            bool cell = type_.GetShapes()[rotation_chunk + y*dimension + x];
             if (cell)
-				board_.SetCell(board_position_ + Vec2<int>{x, y}, type_.color);
+				board_.SetCell(board_position_ + Vec2<int>{x, y}, type_.GetColor());
         }
 }
 
