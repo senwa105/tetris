@@ -25,6 +25,7 @@ private:
     Rotation current_rotation_;
 
     bool PositionHasCollision(Vec2<int> position, Rotation rotation);
+    void Lock();
 
 public:
     Tetromino(const bool* shapes, int dimension, Color color, const Board& board);
@@ -34,6 +35,8 @@ public:
     void RotateCCW();
     void MoveRight();
     void MoveLeft();
+    void SoftDrop();
+    void HardDrop();
 };
 
 class IMino : public Tetromino {
