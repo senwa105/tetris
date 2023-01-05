@@ -6,7 +6,12 @@
 #include "raylibcpp.h"
 #include "Board.h"
 
-struct MinoType {};
+struct MinoType {
+    // dummy values meant to be overriden
+    static constexpr Color color = WHITE;
+    static constexpr int dimension = 0;
+    static constexpr bool shapes[] {};
+};
 
 struct IMino : public MinoType {
     static constexpr Color color = SKYBLUE;
