@@ -20,7 +20,7 @@ private:
     const bool* shapes_;
     const int dimension_;
     const Color color_;
-    const Board& board_;
+    Board& board_;
     Vec2<int> board_position_;
     Rotation current_rotation_;
 
@@ -28,7 +28,7 @@ private:
     void Lock();
 
 public:
-    Tetromino(const bool* shapes, int dimension, Color color, const Board& board);
+    Tetromino(const bool* shapes, int dimension, Color color, Board& board);
     void Draw() const;
     void RotateCW();
     void Rotate180();
