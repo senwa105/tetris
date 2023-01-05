@@ -23,6 +23,8 @@ bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) cons
                 //     return true;
             }
         }
+
+    return false;
 }
 
 void Tetromino::Draw() const {
