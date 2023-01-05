@@ -8,7 +8,7 @@ Tetromino::Tetromino(MinoType type, Board& board)
       current_rotation_(Rotation::R0)
 {}
 
-bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) {
+bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) const {
     for (int y = 0; y < type_.dimension; y++)
         for (int x = 0; x < type_.dimension; x++) {
             int rotation_chunk = static_cast<int>(rotation) * type_.dimension * type_.dimension;
@@ -90,7 +90,7 @@ void Tetromino::MoveLeft() {
             board_position_ += {-1, 0};
 }
 
-void Tetromino::Lock() {
+void Tetromino::Lock() const {
     for (int y = 0; y < type_.dimension; y++)
         for (int x = 0; x < type_.dimension; x++) {
             int rotation_chunk = static_cast<int>(current_rotation_) * type_.dimension * type_.dimension;

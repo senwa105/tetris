@@ -22,8 +22,8 @@ private:
     Vec2<int> board_position_;
     Rotation current_rotation_;
 
-    bool PositionHasCollision(Vec2<int> position, Rotation rotation);
-    void Lock();
+    bool PositionHasCollision(Vec2<int> position, Rotation rotation) const;
+    void Lock() const;
 
 public:
     Tetromino(MinoType type, Board& board);
