@@ -17,7 +17,7 @@ private:
             R270
     };
 
-    MinoType type;
+    MinoType type_;
     Board& board_;
     Vec2<int> board_position_;
     Rotation current_rotation_;
@@ -26,7 +26,7 @@ private:
     void Lock();
 
 public:
-    Tetromino(const bool* shapes, int dimension, Color color, Board& board);
+    Tetromino(MinoType type, Board& board);
     void Draw() const;
     void RotateCW();
     void Rotate180();
