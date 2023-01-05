@@ -36,6 +36,7 @@ set(SOURCES
   src/Board.h
   src/Board.cpp
   src/Vec2.hpp
+  src/MinoType.h
   src/Tetromino.h
   src/Tetromino.cpp)
 
