@@ -4,13 +4,14 @@
 
 #include "raylibcpp.h"
 #include "Settings.h"
+#include "MinoType.h"
 
 Game::Game(int width, int height, int fps, std::string title)
     : board_(settings::board_position,
              settings::board_width_height,
              settings::cell_size,
              settings::cell_padding),
-      active_tetromino_(JMino(), board_),
+      active_tetromino_(&(mino_type::J), board_),
       hold_tetromino_(),
       can_hold_(true)
 {
@@ -58,6 +59,6 @@ void Game::Update() {
         active_tetromino_.SoftDrop();
     if (IsKeyPressed(settings::hard_drop)) {
         active_tetromino_.HardDrop();
-        active_tetromino_ = Tetromino(IMino(), board_);
+        active_tetromino_ = Tetromino(&(mino_type::I), board_);
     }
 }
