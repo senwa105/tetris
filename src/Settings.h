@@ -24,8 +24,8 @@ namespace settings {
     inline constexpr KeyboardKey hold = KEY_S;
     inline constexpr KeyboardKey right = KEY_RIGHT;
     inline constexpr KeyboardKey left = KEY_LEFT;
-    inline constexpr KeyboardKey hard_drop = KEY_SPACE;
     inline constexpr KeyboardKey soft_drop = KEY_DOWN;
+    inline constexpr KeyboardKey hard_drop = KEY_SPACE;
 }
 
 #endif
