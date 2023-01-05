@@ -10,7 +10,7 @@ Game::Game(int width, int height, int fps, std::string title)
              settings::board_width_height,
              settings::cell_size,
              settings::cell_padding),
-      active_tetromino_(JMino{board_}),
+      active_tetromino_(JMino(), board_),
       hold_tetromino_(),
       can_hold_(true)
 {
@@ -54,4 +54,10 @@ void Game::Update() {
         active_tetromino_.MoveRight();
     if (IsKeyDown(settings::left))
         active_tetromino_.MoveLeft();
+    if (IsKeyDown(settings::soft_drop))
+        active_tetromino_.SoftDrop();
+    if (IsKeyPressed(settings::hard_drop)) {
+        active_tetromino_.HardDrop();
+        active_tetromino_ = Tetromino(IMino(), board_);
+    }
 }
