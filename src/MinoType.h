@@ -6,200 +6,155 @@
 #include "raylibcpp.h"
 #include "Board.h"
 
-struct MinoType {
-    // dummy values meant to be overriden
-    static constexpr Color color = WHITE;
-    static constexpr int dimension = 0;
-    static constexpr bool shapes[] {};
+namespace mino_type {
+
+struct Mino {
+    const Color color;
+    const int dimension;
+    const bool* shapes;
 };
 
-struct IMino : public MinoType {
-    static constexpr Color color = SKYBLUE;
-    static constexpr int dimension = 4;
-    static constexpr bool shapes[] 
-        {
-            0, 0, 0, 0,     // Rotation 0
-            1, 1, 1, 1,
-            0, 0, 0, 0,
-            0, 0, 0, 0,
+static constexpr bool i_shapes[]    
+    {
+        0, 0, 0, 0,     // Rotation 0
+        1, 1, 1, 1,
+        0, 0, 0, 0,
+        0, 0, 0, 0,
+    
+        0, 0, 1, 0,     // Rotation 90
+        0, 0, 1, 0,
+        0, 0, 1, 0,
+        0, 0, 1, 0,
+    
+        0, 0, 0, 0,     // Rotation 180
+        0, 0, 0, 0,
+        1, 1, 1, 1,
+        0, 0, 0, 0,
+    
+        0, 1, 0, 0,     // Rotation 270
+        0, 1, 0, 0,
+        0, 1, 0, 0,
+        0, 1, 0, 0
+    };
+
+static constexpr bool o_shapes[]
+    {
+        1, 1,
+        1, 1,
+
+        1, 1,
+        1, 1,
         
-            0, 0, 1, 0,     // Rotation 90
-            0, 0, 1, 0,
-            0, 0, 1, 0,
-            0, 0, 1, 0,
+        1, 1,
+        1, 1,
         
-            0, 0, 0, 0,     // Rotation 180
-            0, 0, 0, 0,
-            1, 1, 1, 1,
-            0, 0, 0, 0,
-        
-            0, 1, 0, 0,     // Rotation 270
-            0, 1, 0, 0,
-            0, 1, 0, 0,
-            0, 1, 0, 0
-        };
+        1, 1,
+        1, 1
+    };
 
-    IMino() {
-        static_assert(sizeof(shapes) / sizeof(bool) == 4 * dimension * dimension);
-    }
-};
+static constexpr bool t_shapes[]
+    {
+        0, 1, 0,
+        1, 1, 1,
+        0, 0, 0,
 
-struct OMino : public MinoType {
-    static constexpr Color color = YELLOW;
-    static constexpr int dimension = 2;
-    static constexpr bool shapes[] 
-        {
-            1, 1,
-            1, 1,
+        0, 1, 0,
+        0, 1, 1,
+        0, 1, 0,
 
-            1, 1,
-            1, 1,
-            
-            1, 1,
-            1, 1,
-            
-            1, 1,
-            1, 1
-        };
+        0, 0, 0,
+        1, 1, 1,
+        0, 1, 0,
 
-    OMino() {
-        static_assert(sizeof(shapes) / sizeof(bool) == 4 * dimension * dimension);
-    }
-};
+        0, 1, 0,
+        1, 1, 0,
+        0, 1, 0, 
+    };
 
-struct TMino : public MinoType {
-    static constexpr Color color = MAGENTA;
-    static constexpr int dimension = 3;
-    static constexpr bool shapes[] 
-        {
-            0, 1, 0,
-            1, 1, 1,
-            0, 0, 0,
+static constexpr bool j_shapes[] 
+    {
+        1, 0, 0,
+        1, 1, 1,
+        0, 0, 0,
 
-            0, 1, 0,
-            0, 1, 1,
-            0, 1, 0,
+        0, 1, 1,
+        0, 1, 0,
+        0, 1, 0,
 
-            0, 0, 0,
-            1, 1, 1,
-            0, 1, 0,
+        0, 0, 0,
+        1, 1, 1,
+        0, 0, 1,
 
-            0, 1, 0,
-            1, 1, 0,
-            0, 1, 0,            
-        };
+        0, 1, 0,
+        0, 1, 0,
+        1, 1, 0
+    };
 
-    TMino() {
-        static_assert(sizeof(shapes) / sizeof(bool) == 4 * dimension * dimension);
-    }
-};
+static constexpr bool l_shapes[] 
+    {
+        0, 0, 1,
+        1, 1, 1,
+        0, 0, 0,
 
-struct JMino : public MinoType {
-    static constexpr Color color = DARKBLUE;
-    static constexpr int dimension = 3;
-    static constexpr bool shapes[] 
-        {
-            1, 0, 0,
-            1, 1, 1,
-            0, 0, 0,
+        0, 1, 0,
+        0, 1, 0,
+        0, 1, 1,
 
-            0, 1, 1,
-            0, 1, 0,
-            0, 1, 0,
+        0, 0, 0, 
+        1, 1, 1, 
+        1, 0, 0, 
 
-            0, 0, 0,
-            1, 1, 1,
-            0, 0, 1,
+        1, 1, 0, 
+        0, 1, 0, 
+        0, 1, 0
+    };
 
-            0, 1, 0,
-            0, 1, 0,
-            1, 1, 0
-        };
+static constexpr bool s_shapes[] 
+    {
+        0, 1, 1,
+        1, 1, 0,
+        0, 0, 0,
 
-    JMino() {
-        static_assert(sizeof(shapes) / sizeof(bool) == 4 * dimension * dimension);
-    }
-};
+        0, 1, 0, 
+        0, 1, 1,
+        0, 0, 1,
 
-struct LMino : public MinoType {
-    static constexpr Color color = ORANGE;
-    static constexpr int dimension = 3;
-    static constexpr bool shapes[] 
-        {
-            0, 0, 1,
-            1, 1, 1,
-            0, 0, 0,
+        0, 0, 0,
+        0, 1, 1,
+        1, 1, 0,
 
-            0, 1, 0,
-            0, 1, 0,
-            0, 1, 1,
+        1, 0, 0,
+        1, 1, 0, 
+        0, 1, 0 
+    };
 
-            0, 0, 0, 
-            1, 1, 1, 
-            1, 0, 0, 
+static constexpr bool z_shapes[] 
+    {
+        1, 1, 0,
+        0, 1, 1,
+        0, 0, 0,
 
-            1, 1, 0, 
-            0, 1, 0, 
-            0, 1, 0
-        };
+        0, 0, 1, 
+        0, 1, 1, 
+        0, 1, 0, 
 
-    LMino() {
-        static_assert(sizeof(shapes) / sizeof(bool) == 4 * dimension * dimension);
-    }
-};
+        0, 0, 0, 
+        1, 1, 0, 
+        0, 1, 1, 
 
-struct SMino : public MinoType {
-    static constexpr Color color = GREEN;
-    static constexpr int dimension = 3;
-    static constexpr bool shapes[] 
-        {
-            0, 1, 1,
-            1, 1, 0,
-            0, 0, 0,
+        0, 1, 0, 
+        1, 1, 0, 
+        1, 0, 0
+    };
 
-            0, 1, 0, 
-            0, 1, 1,
-            0, 0, 1,
+static constexpr Mino I = {SKYBLUE, 4, i_shapes};
+static constexpr Mino O = {YELLOW, 2, o_shapes};
+static constexpr Mino T = {MAGENTA, 3, t_shapes};
+static constexpr Mino J = {DARKBLUE, 3, j_shapes};
+static constexpr Mino L = {ORANGE, 3, l_shapes};
+static constexpr Mino S = {GREEN, 3, s_shapes};
+static constexpr Mino Z = {RED, 3, z_shapes};
 
-            0, 0, 0,
-            0, 1, 1,
-            1, 1, 0,
-
-            1, 0, 0,
-            1, 1, 0, 
-            0, 1, 0 
-        };
-
-    SMino() {
-        static_assert(sizeof(shapes) / sizeof(bool) == 4 * dimension * dimension);
-    }
-};
-
-struct ZMino : public MinoType {
-    static constexpr Color color = RED;
-    static constexpr int dimension = 3;
-    static constexpr bool shapes[] 
-        {
-            1, 1, 0,
-            0, 1, 1,
-            0, 0, 0,
-
-            0, 0, 1, 
-            0, 1, 1, 
-            0, 1, 0, 
-
-            0, 0, 0, 
-            1, 1, 0, 
-            0, 1, 1, 
-
-            0, 1, 0, 
-            1, 1, 0, 
-            1, 0, 0
-        };
-
-    ZMino() {
-        static_assert(sizeof(shapes) / sizeof(bool) == 4 * dimension * dimension);
-    }
-};
+}
 
 #endif
