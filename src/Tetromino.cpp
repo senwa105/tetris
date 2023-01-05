@@ -1,7 +1,7 @@
 #include "Tetromino.h"
 #include <iostream>
 
-Tetromino::Tetromino(const bool* shapes, int dimension, Color color, const Board& board)
+Tetromino::Tetromino(const bool* shapes, int dimension, Color color, Board& board)
     : shapes_(shapes),
       dimension_(dimension),
       color_(color),
@@ -90,4 +90,28 @@ void Tetromino::MoveRight() {
 void Tetromino::MoveLeft() {
     if (!PositionHasCollision(board_position_ + Vec2<int>{-1, 0}, current_rotation_))
             board_position_ += {-1, 0};
+}
+
+void Tetromino::Lock() {
+    for (int y = 0; y < dimension_; y++)
+        for (int x = 0; x < dimension_; x++) {
+            int rotation_chunk = static_cast<int>(current_rotation_) * dimension_ * dimension_;
+            bool cell = shapes_[rotation_chunk + y*dimension_ + x];
+            if (cell) {
+				board_.SetCell(board_position_ + Vec2<int>{x, y}, color_);
+                // spawn new tetromino
+            }
+        }
+}
+
+void Tetromino::SoftDrop() {
+    if (!PositionHasCollision(board_position_ + Vec2<int>{0, 1}, current_rotation_))
+        board_position_ += {0, 1};
+}
+
+void Tetromino::HardDrop() {
+    while (!PositionHasCollision(board_position_ + Vec2<int>{0, 1}, current_rotation_))
+        board_position_ += {0, 1};
+
+    Lock();
 }
