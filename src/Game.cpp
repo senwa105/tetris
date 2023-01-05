@@ -4,7 +4,7 @@
 
 #include "raylibcpp.h"
 #include "Settings.h"
-#include "MinoType.h"
+#include "MinoType.hpp"
 
 Game::Game(int width, int height, int fps, std::string title)
     : board_(settings::board_position,

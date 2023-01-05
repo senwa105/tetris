@@ -4,7 +4,7 @@
 #include <cassert>
 
 #include "raylibcpp.h"
-#include "MinoType.h"
+#include "MinoType.hpp"
 #include "Vec2.hpp"
 #include "Board.h"
 
