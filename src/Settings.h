@@ -26,6 +26,9 @@ namespace settings {
     inline constexpr KeyboardKey left = KEY_LEFT;
     inline constexpr KeyboardKey soft_drop = KEY_DOWN;
     inline constexpr KeyboardKey hard_drop = KEY_SPACE;
+
+    // Game settings
+    inline constexpr bool use_bag_randomizer = true;
 }
 
 #endif
