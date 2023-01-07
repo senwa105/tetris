@@ -11,10 +11,16 @@ Game::Game(int width, int height, int fps, std::string title)
              settings::board_width_height,
              settings::cell_size,
              settings::cell_padding),
-      active_tetromino_(&(mino_type::J), board_),
+      active_tetromino_(&(mino_type::I), board_),   // dummy value
       hold_tetromino_(),
       can_hold_(true)
 {
+    if (settings::use_bag_randomizer)
+        randomizer_ = BagRandomizer();
+    else randomizer_ = CompleteRandomizer();
+
+    active_tetromino_ = {&(randomizer_.GetNextTetromino()), board_};
+
     assert(!GetWindowHandle() && "Window is already open");
     SetConfigFlags(FLAG_VSYNC_HINT);
     SetTargetFPS(fps);
@@ -22,7 +28,7 @@ Game::Game(int width, int height, int fps, std::string title)
 }
 
 Game::~Game() {
-    assert(GetWindowHandle() && "Window is already closed");
+    // assert(GetWindowHandle() && "Window is already closed");
     CloseWindow();
 }
 
@@ -59,6 +65,6 @@ void Game::Update() {
         active_tetromino_.SoftDrop();
     if (IsKeyPressed(settings::hard_drop)) {
         active_tetromino_.HardDrop();
-        active_tetromino_ = Tetromino(&(mino_type::I), board_);
+        active_tetromino_ = Tetromino(&(randomizer_.GetNextTetromino()), board_);
     }
 }
