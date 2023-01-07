@@ -1,6 +1,7 @@
 #include "Game.h"
 
 #include <cassert>
+#include <memory>
 
 #include "raylibcpp.h"
 #include "Settings.h"
@@ -11,15 +12,16 @@ Game::Game(int width, int height, int fps, std::string title)
              settings::board_width_height,
              settings::cell_size,
              settings::cell_padding),
+      randomizer_(),
       active_tetromino_(&(mino_type::I), board_),   // dummy value
       hold_tetromino_(),
       can_hold_(true)
 {
     if (settings::use_bag_randomizer)
-        randomizer_ = BagRandomizer();
-    else randomizer_ = CompleteRandomizer();
+        randomizer_ = std::make_unique<BagRandomizer>();
+    else randomizer_ = std::make_unique<CompleteRandomizer>();
 
-    active_tetromino_ = {&(randomizer_.GetNextTetromino()), board_};
+    active_tetromino_ = Tetromino(randomizer_->GetNextTetromino(), board_);
 
     assert(!GetWindowHandle() && "Window is already open");
     SetConfigFlags(FLAG_VSYNC_HINT);
@@ -65,6 +67,6 @@ void Game::Update() {
         active_tetromino_.SoftDrop();
     if (IsKeyPressed(settings::hard_drop)) {
         active_tetromino_.HardDrop();
-        active_tetromino_ = Tetromino(&(randomizer_.GetNextTetromino()), board_);
+        active_tetromino_ = Tetromino(randomizer_->GetNextTetromino(), board_);
     }
 }
