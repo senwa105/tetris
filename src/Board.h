@@ -39,6 +39,7 @@ public:
     void DrawCell(Vec2<int> position) const;
     void DrawBorder() const;
     void Draw() const;
+    void ClearLines();
 };
 
 #endif
