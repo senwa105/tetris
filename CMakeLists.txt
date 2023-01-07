@@ -38,7 +38,10 @@ set(SOURCES
   src/Vec2.hpp
   src/MinoType.hpp
   src/Tetromino.h
-  src/Tetromino.cpp)
+  src/Tetromino.cpp
+  src/Randomizer.h 
+  src/Randomizer.cpp 
+)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 #set(raylib_VERBOSE 1)
