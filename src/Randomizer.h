@@ -25,7 +25,7 @@ public:
 
 class BagRandomizer : public Randomizer {
 private:
-    bool used[minos.size()];
+    std::array<bool, minos.size()> used;
 
 public:
     mino_type::Mino GetNextTetromino() override;
