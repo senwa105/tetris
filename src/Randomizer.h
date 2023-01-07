@@ -2,6 +2,7 @@
 #define RANDOMIZER_HPP
 
 #include <array>
+#include <vector>
 
 #include "raylibcpp.h"
 #include "MinoType.hpp"
@@ -25,7 +26,7 @@ public:
 
 class BagRandomizer : public Randomizer {
 private:
-    std::array<bool, minos.size()> used;
+    std::vector<int> minos_left {0, 1, 2, 3, 4, 5, 6};
 
 public:
     mino_type::Mino GetNextTetromino() override;
