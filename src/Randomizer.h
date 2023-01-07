@@ -3,6 +3,7 @@
 
 #include <array>
 #include <vector>
+#include <chrono>
 
 #include "raylibcpp.h"
 #include "MinoType.hpp"
@@ -21,6 +22,7 @@ protected:
         };
 
 public:
+    Randomizer() { SetRandomSeed(std::time(0)); }
     virtual const mino_type::Mino* GetNextTetromino() = 0;
 };
 
