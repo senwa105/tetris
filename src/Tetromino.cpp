@@ -92,6 +92,8 @@ void Tetromino::Lock() const {
             if (cell)
 				board_.SetCell(board_position_ + Vec2<int>{x, y}, type_->color);
         }
+
+    board_.ClearLines();
 }
 
 void Tetromino::SoftDrop() {
