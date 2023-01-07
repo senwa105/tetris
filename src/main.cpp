@@ -7,7 +7,7 @@ int main(void) {
     Game game{settings::screenWidth, 
               settings::screenHeight, 
               settings::fps, 
-              "Tetris Example"};
+              "Tetris"};
 
     while (!game.ShouldClose()) {
         game.Tick();
