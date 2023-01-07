@@ -6,6 +6,7 @@
 
 #include "Board.h"
 #include "Tetromino.h"
+#include "Randomizer.h"
 
 class Game {
 public:
@@ -19,6 +20,7 @@ public:
     
 private:
     Board board_;
+    Randomizer randomizer_;
     Tetromino active_tetromino_;
     std::optional<Tetromino> hold_tetromino_;
     bool can_hold_;
