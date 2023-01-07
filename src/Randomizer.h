@@ -21,7 +21,7 @@ protected:
         };
 
 public:
-    virtual const mino_type::Mino* GetNextTetromino();
+    virtual const mino_type::Mino* GetNextTetromino() = 0;
 };
 
 class BagRandomizer : public Randomizer {
