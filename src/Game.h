@@ -3,6 +3,7 @@
 
 #include <string>
 #include <optional>
+#include <memory>
 
 #include "Board.h"
 #include "Tetromino.h"
@@ -20,7 +21,7 @@ public:
     
 private:
     Board board_;
-    Randomizer randomizer_;
+    std::unique_ptr<Randomizer> randomizer_;
     Tetromino active_tetromino_;
     std::optional<Tetromino> hold_tetromino_;
     bool can_hold_;
