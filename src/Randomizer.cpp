@@ -4,7 +4,7 @@
 
 #include "raylibcpp.h"
 
-mino_type::Mino BagRandomizer::GetNextTetromino() {
+const mino_type::Mino* BagRandomizer::GetNextTetromino() {
     if (minos_left.size() == 0)
         minos_left = {0, 1, 2, 3, 4, 5, 6};
 
@@ -14,6 +14,6 @@ mino_type::Mino BagRandomizer::GetNextTetromino() {
     return minos[next_mino];
 }
 
-mino_type::Mino CompleteRandomizer::GetNextTetromino() {
+const mino_type::Mino* CompleteRandomizer::GetNextTetromino() {
     return minos[GetRandomValue(0, minos.size()-1)];
 }
