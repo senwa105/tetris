@@ -11,8 +11,8 @@ namespace settings {
     inline constexpr int fps = 60;  // set to 0 for uncapped framerate
 
     // Board settings
-    inline constexpr Vec2<int> board_position{200, 100};
-    inline constexpr Vec2<int> board_width_height{10, 20};
+    inline constexpr Vec2<int> board_position = {200, 100};
+    inline constexpr Vec2<int> board_width_height = {10, 20};
     inline constexpr int cell_size = 20;
     inline constexpr int cell_padding = 2;
     inline constexpr int border_width = 3;
@@ -31,6 +31,9 @@ namespace settings {
     // Game settings
     inline constexpr bool use_bag_randomizer = true;
     inline constexpr int num_previews = 5;
+
+    // Preview Board settings
+    inline constexpr Vec2<int> preview_board_position = {500, 100};
 }
 
 #endif
