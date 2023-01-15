@@ -10,8 +10,11 @@ Previews::Previews()
         randomizer_ = std::make_unique<BagRandomizer>();
     else randomizer_ = std::make_unique<CompleteRandomizer>();
 
-    for (int i = 0; i < settings::num_previews; i++)
-        next_minos_.push(Tetromino{randomizer_->GetNextTetromino(), board_});
+    int spawn_y = 0;
+    for (int i = 0; i < settings::num_previews; i++) {
+        next_minos_.push(Tetromino{randomizer_->GetNextTetromino(), board_, Vec2{0, spawn_y}, Tetromino::Rotation::R0});
+        spawn_y += settings::preview_vertical_spacing;
+    }
 }
 
 MinoType Previews::GetNextMino() {
