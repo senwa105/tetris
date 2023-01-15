@@ -13,7 +13,7 @@ Game::Game(int width, int height, int fps, std::string title)
              settings::cell_size,
              settings::cell_padding),
       randomizer_(),
-      active_tetromino_(&(mino_type::I), board_),   // dummy value
+      active_tetromino_(MinoType::I, board_),   // dummy value
       hold_tetromino_(),
       can_hold_(true)
 {
