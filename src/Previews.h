@@ -14,6 +14,8 @@ private:
     std::unique_ptr<Randomizer> randomizer_;
     Board board_;
 
+    void AddNextMino();
+
 public:
     Previews();
     MinoType GetNextMino();

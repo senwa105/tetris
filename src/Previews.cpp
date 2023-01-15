@@ -20,11 +20,23 @@ Previews::Previews()
 MinoType Previews::GetNextMino() {
     MinoType next = next_minos_.front().GetMinoType();
     next_minos_.pop_front();
-    next_minos_.push_back(Tetromino{randomizer_->GetNextTetromino(), 
-                          board_, 
-                          Vec2{0, settings::preview_vertical_spacing * (settings::num_previews - 1)}, 
-                          Tetromino::Rotation::R0});
+    AddNextMino();
     return next;
+}
+
+void Previews::AddNextMino() {
+    // Move existing tetrominos up
+    int spawn_y = 0;
+    for (int i = 0; i < settings::num_previews - 1; i++) {
+        next_minos_[i].SetBoardPosition({0, spawn_y});
+        spawn_y += settings::preview_vertical_spacing;
+    }
+
+    next_minos_.push_back(Tetromino{randomizer_->GetNextTetromino(), 
+                        board_, 
+                        Vec2{0, settings::preview_vertical_spacing * (settings::num_previews - 1)}, 
+                        Tetromino::Rotation::R0});
+    
 }
 
 void Previews::Draw() {
