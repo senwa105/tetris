@@ -26,7 +26,8 @@ private:
     void Lock() const;
 
 public:
-    Tetromino(const MinoType type, Board& board);
+    Tetromino(MinoType type, Board& board);
+    Tetromino(MinoType type, Board& board, Vec2<int> board_position, Rotation rotation);
     Tetromino& operator=(const Tetromino& other);
     MinoType GetMinoType() const;
     void Draw() const;

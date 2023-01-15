@@ -4,11 +4,18 @@
 
 #include "MinoType.hpp"
 
-Tetromino::Tetromino(const MinoType type, Board& board)
+Tetromino::Tetromino(MinoType type, Board& board)
     : type_(type),
       board_(board),
       board_position_(board.GetWidth()/2 - minos[static_cast<int>(type)].dimension/2, 0),
       current_rotation_(Rotation::R0)
+{}
+
+Tetromino::Tetromino(const MinoType type, Board& board, Vec2<int> board_position, Rotation rotation)
+    : type_(type),
+      board_(board),
+      board_position_(board_position),
+      current_rotation_(rotation)
 {}
 
 Tetromino& Tetromino::operator=(const Tetromino& other) {
