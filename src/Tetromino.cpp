@@ -30,6 +30,10 @@ MinoType Tetromino::GetMinoType() const {
     return type_;
 }
 
+void Tetromino::SetBoardPosition(Vec2<int> board_position) {
+    board_position_ = board_position;
+}
+
 bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) const {
     int dimension = minos[static_cast<int>(type_)].dimension;
     for (int y = 0; y < dimension; y++)

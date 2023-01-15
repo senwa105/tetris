@@ -30,6 +30,7 @@ public:
     Tetromino(MinoType type, Board& board, Vec2<int> board_position, Rotation rotation);
     Tetromino& operator=(const Tetromino& other);
     MinoType GetMinoType() const;
+    void SetBoardPosition(Vec2<int> board_position);
     void Draw() const;
     void RotateCW();
     void Rotate180();
