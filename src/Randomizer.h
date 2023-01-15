@@ -16,9 +16,22 @@ public:
 
 class BagRandomizer : public Randomizer {
 private:
-    std::vector<int> minos_left {0, 1, 2, 3, 4, 5, 6};
+    std::vector<MinoType> minos_left_ = {
+        MinoType::I,
+        MinoType::O,
+        MinoType::T,
+        MinoType::J,
+        MinoType::L,
+        MinoType::S,
+        MinoType::Z
+    };
 
 public:
+    BagRandomizer() = default;
+    BagRandomizer(std::vector<MinoType> minos_left)
+        : minos_left_(minos_left)
+    {}
+    
     const MinoType GetNextTetromino() override;
 };
 
