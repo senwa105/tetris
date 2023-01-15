@@ -1,6 +1,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include "raylibcpp.h"
 #include "Vec2.hpp"
 
 namespace settings {
