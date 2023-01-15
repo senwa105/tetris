@@ -3,12 +3,10 @@
 
 #include <string>
 #include <optional>
-#include <memory>
-#include <queue>
 
 #include "Board.h"
 #include "Tetromino.h"
-#include "Randomizer.h"
+#include "Previews.h"
 
 class Game {
 public:
@@ -22,8 +20,7 @@ public:
     
 private:
     Board board_;
-    std::unique_ptr<Randomizer> randomizer_;
-    std::queue<MinoType> previews;
+    Previews previews_;
     Tetromino active_tetromino_;
     std::optional<MinoType> hold_tetromino_;
     bool can_hold_;
