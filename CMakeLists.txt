@@ -41,6 +41,8 @@ set(SOURCES
   src/Tetromino.cpp
   src/Randomizer.h 
   src/Randomizer.cpp 
+  src/Previews.h 
+  src/Previews.cpp 
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
