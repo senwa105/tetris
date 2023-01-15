@@ -34,6 +34,7 @@ namespace settings {
 
     // Preview Board settings
     inline constexpr Vec2<int> preview_board_position = {500, 100};
+    inline constexpr int preview_vertical_spacing = 3;
 }
 
 #endif
