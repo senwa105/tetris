@@ -9,14 +9,14 @@
 #include "Board.h"
 
 class Tetromino {
-private:
+public:
     enum class Rotation {
-            R0,
-            R90,
-            R180,
-            R270
-    };
-
+                R0,
+                R90,
+                R180,
+                R270
+        };
+private:
     MinoType type_;
     Board& board_;
     Vec2<int> board_position_;
