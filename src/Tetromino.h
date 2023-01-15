@@ -39,6 +39,9 @@ public:
     void MoveLeft();
     void SoftDrop();
     void HardDrop();
+
+    // Draw tetromino in arbitrary location
+    static void Draw(MinoType type, Vec2<int> position);
 };
 
 #endif

@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "MinoType.hpp"
+#include "Settings.h"
 
 Tetromino::Tetromino(MinoType type, Board& board)
     : type_(type),
@@ -63,8 +64,7 @@ void Tetromino::Draw() const {
             bool cell = minos[static_cast<int>(type_)].shapes[rotation_chunk + y*dimension + x];
             if (cell)
 				board_.DrawCell(board_position_ + Vec2<int>{x, y}, minos[static_cast<int>(type_)].color);
-        }
-            
+        }        
 }
 
 void Tetromino::RotateCW() {
@@ -124,4 +124,18 @@ void Tetromino::HardDrop() {
         board_position_ += {0, 1};
 
     Lock();
+}
+
+void Tetromino::Draw(MinoType type, Vec2<int> position) {
+    int dimension = minos[static_cast<int>(type)].dimension;
+    for (int y = 0; y < dimension; y++)
+        for (int x = 0; x < dimension; x++) {
+            int rotation_chunk = 0; // always draw in default rotation
+            bool cell = minos[static_cast<int>(type)].shapes[rotation_chunk + y*dimension + x];
+            if (cell) {
+                Vec2<int> top_left = position * settings::cell_size + settings::cell_padding;
+                Vec2<int> width_height = {settings::cell_size - settings::cell_padding, settings::cell_size - settings::cell_padding};
+                raylibcpp::DrawRectangle(top_left, width_height, minos[static_cast<int>(type)].color);
+            }
+        }
 }
