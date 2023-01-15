@@ -30,6 +30,7 @@ namespace settings {
 
     // Game settings
     inline constexpr bool use_bag_randomizer = true;
+    inline constexpr int num_previews = 5;
 }
 
 #endif

@@ -4,6 +4,7 @@
 #include <string>
 #include <optional>
 #include <memory>
+#include <queue>
 
 #include "Board.h"
 #include "Tetromino.h"
@@ -22,8 +23,9 @@ public:
 private:
     Board board_;
     std::unique_ptr<Randomizer> randomizer_;
+    std::queue<MinoType> previews;
     Tetromino active_tetromino_;
-    std::optional<Tetromino> hold_tetromino_;
+    std::optional<MinoType> hold_tetromino_;
     bool can_hold_;
 
     void Draw();
