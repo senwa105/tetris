@@ -28,6 +28,7 @@ private:
 public:
     Tetromino(const MinoType type, Board& board);
     Tetromino& operator=(const Tetromino& other);
+    MinoType GetMinoType() const;
     void Draw() const;
     void RotateCW();
     void Rotate180();
