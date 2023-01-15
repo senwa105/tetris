@@ -33,7 +33,7 @@ namespace settings {
     inline constexpr int num_previews = 5;
 
     // Preview Board settings
-    inline constexpr Vec2<int> preview_board_position = {500, 100};
+    inline constexpr Vec2<int> preview_board_position = {425, 100};
     inline constexpr Vec2<int> preview_board_width_height = {4, 20};
     inline constexpr int preview_vertical_spacing = 3;
 }
