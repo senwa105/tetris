@@ -1,10 +1,13 @@
 #include "Tetromino.h"
+
 #include <iostream>
 
-Tetromino::Tetromino(const mino_type::Mino* type, Board& board)
+#include "MinoType.hpp"
+
+Tetromino::Tetromino(const MinoType type, Board& board)
     : type_(type),
       board_(board),
-      board_position_(board.GetWidth()/2 - type_->dimension/2, 0),
+      board_position_(board.GetWidth()/2 - minos[static_cast<int>(type)].dimension/2, 0),
       current_rotation_(Rotation::R0)
 {}
 
@@ -17,11 +20,11 @@ Tetromino& Tetromino::operator=(const Tetromino& other) {
 }
 
 bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) const {
-    int dimension = type_->dimension;
+    int dimension = minos[static_cast<int>(type_)].dimension;
     for (int y = 0; y < dimension; y++)
         for (int x = 0; x < dimension; x++) {
             int rotation_chunk = static_cast<int>(rotation) * dimension * dimension;
-            bool cell = type_->shapes[rotation_chunk + y*dimension + x];
+            bool cell = minos[static_cast<int>(type_)].shapes[rotation_chunk + y*dimension + x];
             if (cell) {
                 int cell_x = position.GetX() + x;
                 int cell_y = position.GetY() + y;
@@ -36,15 +39,15 @@ bool Tetromino::PositionHasCollision(Vec2<int> position, Rotation rotation) cons
 }
 
 void Tetromino::Draw() const {
-    int dimension = type_->dimension;
+    int dimension = minos[static_cast<int>(type_)].dimension;
     for (int y = 0; y < dimension; y++)
         for (int x = 0; x < dimension; x++) {
             // find the block that describes the shape of the current rotation
             // eg, first dimension*dimension entries describes shape of rotation 0
             int rotation_chunk = static_cast<int>(current_rotation_) * dimension * dimension;
-            bool cell = type_->shapes[rotation_chunk + y*dimension + x];
+            bool cell = minos[static_cast<int>(type_)].shapes[rotation_chunk + y*dimension + x];
             if (cell)
-				board_.DrawCell(board_position_ + Vec2<int>{x, y}, type_->color);
+				board_.DrawCell(board_position_ + Vec2<int>{x, y}, minos[static_cast<int>(type_)].color);
         }
             
 }
@@ -84,13 +87,13 @@ void Tetromino::MoveLeft() {
 }
 
 void Tetromino::Lock() const {
-    int dimension = type_->dimension;
+    int dimension = minos[static_cast<int>(type_)].dimension;
     for (int y = 0; y < dimension; y++)
         for (int x = 0; x < dimension; x++) {
             int rotation_chunk = static_cast<int>(current_rotation_) * dimension * dimension;
-            bool cell = type_->shapes[rotation_chunk + y*dimension + x];
+            bool cell = minos[static_cast<int>(type_)].shapes[rotation_chunk + y*dimension + x];
             if (cell)
-				board_.SetCell(board_position_ + Vec2<int>{x, y}, type_->color);
+				board_.SetCell(board_position_ + Vec2<int>{x, y}, minos[static_cast<int>(type_)].color);
         }
 
     board_.ClearLines();
