@@ -23,6 +23,9 @@ Game::Game(int width, int height, int fps, std::string title)
 
     active_tetromino_ = Tetromino(randomizer_->GetNextTetromino(), board_);
 
+    for (int i = 0; i < settings::num_previews; i++)
+        previews.push(randomizer_->GetNextTetromino());
+
     assert(!GetWindowHandle() && "Window is already open");
     SetConfigFlags(FLAG_VSYNC_HINT);
     SetTargetFPS(fps);
